@@ -1,0 +1,18 @@
+Karen Li, 204564235
+CS 111 Project 4: Embedded Systems
+==================================
+
+Included Files
+==============
+part1.c -- C source module for Part 1
+part2.c -- C source module for Part 2
+part3.c -- C source module for Part 3
+lab4_1.log -- log file for Part 1
+lab4_2.log -- log file for Part 2
+lab4_3.log -- log file for Part 3
+Makefile -- build the program and the tarball
+README -- documentation for the project
+
+Additional Information
+======================
+I did not implement the DISP command. However, my programs for part 2 and part 3 do accept "DISP Y" and "DISP N" as valid commands.

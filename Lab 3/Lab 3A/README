@@ -1,0 +1,13 @@
+Karen Li, 204564235
+CS 111 Project 3A: File System Dump
+===================================
+
+Included Files
+==============
+lab3a.c -- the C source file for our project, which analyzes and summarizes a file system's contents
+Makefile -- to build the program and tarball
+README -- descriptions of each of the included files and additional information
+
+Testing Methodology
+===================
+I tested my program by saving all of the ".csv" files provided as solutions in a directory called "solutions" and then checked if my program had the correct output by taking the "diff" of my files and the solution files.

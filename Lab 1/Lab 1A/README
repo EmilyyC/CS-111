@@ -1,0 +1,18 @@
+CS 111 - Lab 1A: Simpleton Shell
+Karen Li, UID: 204564235
+
+Files Included
+--------------
+simpsh.c -- the C source module
+Makefile -- to build the program and tarball and run some tests
+README -- documentation explaining the project
+
+Testing Methodology  
+-------------------  
+For my "make check", I tested my program's functionality by designing three 
+test cases that would check if my program was performing file redirection and 
+executing the commands correctly. I used the command "cat" to send input from 
+the file descriptor specified by "--command" as stdin to the file descriptor 
+specified by "--command" as stdout. I performed this for various combinations 
+of file descriptors, and in each case, I diff'd the contents of the stdin and 
+stdout files to see if they were the same.

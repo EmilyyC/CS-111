@@ -1,0 +1,31 @@
+CS 111 - Project 0: Warmup 
+Karen Li, UID: 204564235
+
+Files Included
+--------------
+lab0.c -- the C source module
+Makefile -- to build the program and tarball
+backtrace.png -- screenshot of gdb when getting stack backtrace for segfault (#5)
+nullptr.png -- screenshot of gdb when inspecting NULL pointer for segfault (#6)
+README -- documentation explaining the project
+
+Outside Resources
+-----------------
+In order to figure out how to use getopt_long(), I used the following resources: 
+https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Options.html
+https://www.gnu.org/software/libc/manual/html_node/Getopt-Long-Option-Example.html
+
+Moreover, I used this page to learn how to write a Makefile:
+http://mrbook.org/blog/tutorials/make/
+
+I also used this page to learn how to write the "make check" section of the Makefile:
+https://blog.melski.net/2010/11/15/shell-commands-in-gnu-make/
+
+Testing Methodology 
+------------------- 
+For my smoke test for the "make check", I implemented the following tests: 
+> correctly implements --input and --output and returns 0 
+> check to see if correctly copies input to output 
+I was unable to check for cases where it exited without return 0 because the 
+Makefile would not continue executing afterwards since it thought it had 
+encountered an error in the program.

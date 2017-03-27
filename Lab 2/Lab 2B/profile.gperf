@@ -1,0 +1,118 @@
+Total: 54 samples
+      51  94.4%  94.4%       51  94.4% lockSpinLock
+       3   5.6% 100.0%        3   5.6% __strcmp_sse42
+       0   0.0% 100.0%        2   3.7% SortedList_insert
+       0   0.0% 100.0%        1   1.9% SortedList_lookup
+       0   0.0% 100.0%       54 100.0% __clone
+       0   0.0% 100.0%       54 100.0% start_thread
+       0   0.0% 100.0%       54 100.0% threadIterations
+ROUTINE ====================== threadIterations in /u/cs/ugrad/karenl/Desktop/CS111/Lab2/lab2_list.c
+     0     54 Total samples (flat / cumulative)
+     .      .   34: // global mutex lock to be used by all threads
+     .      .   35: pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+     .      .   36: 
+     .      .   37: // ProfilerStart("profile.gperf");
+     .      .   38: 
+---
+     .      .   39: void *threadIterations(void *threadArg) {
+     .      .   40: 	// get the argument needed 
+     .      .   41: 	int threadID = * (int *) threadArg;  // cast the thread argument and dereference it
+     .      .   42: 
+     .      .   43: 	if (syncOption == 'm')
+     .      .   44: 		pthread_mutex_lock(&lock);  // acquire the lock 
+     .      .   45: 
+     .      .   46: 	if (syncOption == 's')
+     .     51   47: 		lockSpinLock(&spinLock);  // acquire the spin lock
+     .      .   48: 
+     .      .   49: 	// insert this thread's designated elements into the list
+     .      .   50: 	int i;
+     .      .   51: 	for (i = threadID; i < numListElements; i += numThreads) {
+     .      2   52: 		SortedList_insert(head, allElements[i]);
+     .      .   53: 	}
+     .      .   54: 	// get the list length
+     .      .   55: 	int listLength = SortedList_length(head);
+     .      .   56: 	// lookup and delete each of the keys previously inserted
+     .      .   57: 	SortedListElement_t *currElement;
+     .      .   58: 	for (i = threadID; i < numListElements; i += numThreads) {
+     .      .   59: 		// look up the element
+     .      1   60: 		currElement = SortedList_lookup(head, allElements[i]->key);
+     .      .   61: 		if (currElement == NULL) {
+     .      .   62: 			perror("Error: Cannot find previously inserted list element");
+     .      .   63: 			exit(1);   // there was an error when looking up the previously inserted element
+     .      .   64: 		}
+     .      .   65: 		// delete the element
+     .      .   66: 		if (SortedList_delete(currElement) != 0) {  
+     .      .   67: 			perror("Error: Cannot delete list element due to corrupted element pointers");
+     .      .   68: 			exit(1);
+     .      .   69: 		}
+     .      .   70: 	}
+     .      .   71: 
+     .      .   72: 	if (syncOption == 'm')
+     .      .   73: 		pthread_mutex_unlock(&lock);  // release the lock 
+     .      .   74: 
+     .      .   75: 	if (syncOption == 's') 
+     .      .   76: 		unlockSpinLock(&spinLock);  // release the spin lock
+     .      .   77: 
+     .      .   78: 	// exit to re-join the parent thread
+     .      .   79: 	pthread_exit(NULL);
+---
+     .      .   80: }
+     .      .   81: 
+     .      .   82: // ProfilerEnd();
+     .      .   83: 
+     .      .   84: // used to generate random keys for the list elements
+ROUTINE ====================== threadIterations in /u/cs/ugrad/karenl/Desktop/CS111/Lab2/lab2_list.c
+     0     54 Total samples (flat / cumulative)
+     .      .   34: // global mutex lock to be used by all threads
+     .      .   35: pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+     .      .   36: 
+     .      .   37: // ProfilerStart("profile.gperf");
+     .      .   38: 
+---
+     .      .   39: void *threadIterations(void *threadArg) {
+     .      .   40: 	// get the argument needed 
+     .      .   41: 	int threadID = * (int *) threadArg;  // cast the thread argument and dereference it
+     .      .   42: 
+     .      .   43: 	if (syncOption == 'm')
+     .      .   44: 		pthread_mutex_lock(&lock);  // acquire the lock 
+     .      .   45: 
+     .      .   46: 	if (syncOption == 's')
+     .     51   47: 		lockSpinLock(&spinLock);  // acquire the spin lock
+     .      .   48: 
+     .      .   49: 	// insert this thread's designated elements into the list
+     .      .   50: 	int i;
+     .      .   51: 	for (i = threadID; i < numListElements; i += numThreads) {
+     .      2   52: 		SortedList_insert(head, allElements[i]);
+     .      .   53: 	}
+     .      .   54: 	// get the list length
+     .      .   55: 	int listLength = SortedList_length(head);
+     .      .   56: 	// lookup and delete each of the keys previously inserted
+     .      .   57: 	SortedListElement_t *currElement;
+     .      .   58: 	for (i = threadID; i < numListElements; i += numThreads) {
+     .      .   59: 		// look up the element
+     .      1   60: 		currElement = SortedList_lookup(head, allElements[i]->key);
+     .      .   61: 		if (currElement == NULL) {
+     .      .   62: 			perror("Error: Cannot find previously inserted list element");
+     .      .   63: 			exit(1);   // there was an error when looking up the previously inserted element
+     .      .   64: 		}
+     .      .   65: 		// delete the element
+     .      .   66: 		if (SortedList_delete(currElement) != 0) {  
+     .      .   67: 			perror("Error: Cannot delete list element due to corrupted element pointers");
+     .      .   68: 			exit(1);
+     .      .   69: 		}
+     .      .   70: 	}
+     .      .   71: 
+     .      .   72: 	if (syncOption == 'm')
+     .      .   73: 		pthread_mutex_unlock(&lock);  // release the lock 
+     .      .   74: 
+     .      .   75: 	if (syncOption == 's') 
+     .      .   76: 		unlockSpinLock(&spinLock);  // release the spin lock
+     .      .   77: 
+     .      .   78: 	// exit to re-join the parent thread
+     .      .   79: 	pthread_exit(NULL);
+---
+     .      .   80: }
+     .      .   81: 
+     .      .   82: // ProfilerEnd();
+     .      .   83: 
+     .      .   84: // used to generate random keys for the list elements

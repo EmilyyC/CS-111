@@ -1,0 +1,17 @@
+Karen Li, 204564235
+CS 111 Project 3B: File System Analysis
+=======================================
+
+Included Files
+==============
+lab3b.py -- the Python source file for our project, which analyzes the csv files produced in part A to diagnose the problems in the provided file system image
+Makefile -- to build the program and tarball
+README -- descriptions of each of the included files and additional information
+
+How To Execute
+==============
+Put all of the files included in the tarball in the same directory as the six csv files from part A. Run either the command "python lab3b.py" or "make run" while inside the directory to execute the program.
+
+Testing Methodology
+===================
+I tested my program by running my program with the command "python lab3b.py" in the same directory as the csv files from part A. Then, I checked if my program had the correct output by "sort"ing my output file and the solutions file and then taking the "diff" of my output file and the solution file.
